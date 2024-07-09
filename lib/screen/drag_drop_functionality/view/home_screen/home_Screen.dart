@@ -1,66 +1,72 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/image_list.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _GameScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _GameScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Match Game'),
+      appBar: AppBar(
+        title: Text(
+          'Matching Game',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Draggable(
-                data: 'Dipali',
-                feedback: Material(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 100,
-                    decoration: const BoxDecoration(color: Colors.redAccent),
-                    child: const Text('Dipali'),
-                  ),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 100,
-                  decoration: const BoxDecoration(color: Colors.teal),
-                  child: const Text('Dipali'),
-                ),
-              ),
-              const Spacer(),
-              DragTarget(
-
-                onAcceptWithDetails: (details) {
-                  if(details.data == 'Dipali')
-                  {
-                    color = Colors.cyan;
-                  }
-                },
-                builder: (context, candidateData, rejectedData) {
-                  return Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 100,
-                    decoration: BoxDecoration(color: color),
-                    child: const Text('Coding'),
-                  );
-                },
-              )
-            ],
+        centerTitle: true,
+      ),
+      body: Row(
+        children: [
+          Column(
+            children: List.generate(
+                5,
+                    (index) => Draggable(
+                    data: imageList1,
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      margin: EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(imageList[index]))),
+                    ),
+                    feedback: Container(
+                      height: 100,
+                      width: 100,
+                      margin: EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage(imageList[index]))),
+                    ))),
           ),
-        ));
+          Spacer(),
+          Column(
+            children: List.generate(
+                5,
+                    (index) => DragTarget(
+                  onAcceptWithDetails: (details) {
+                    if(imageList == imageList1){
+                      // return
+                    }
+                  },
+                  builder: (context, candidateData, rejectedData) {
+                    return Container(
+                      height: 100,
+                      width: 100,
+                      margin: EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(imageList1[index]))),
+                    );
+                  },
+                )),
+          )
+        ],
+      ),
+    );
   }
 }
-
-
-Color color = Colors.purpleAccent;
