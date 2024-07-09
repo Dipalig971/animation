@@ -14,7 +14,7 @@ class _GameScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Matching Game',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
@@ -25,45 +25,50 @@ class _GameScreenState extends State<HomeScreen> {
           Column(
             children: List.generate(
                 5,
-                    (index) => Draggable(
+                (index) => Draggable(
                     data: imageList1,
-                    child: Container(
+                    feedback: Container(
                       height: 100,
                       width: 100,
-                      margin: EdgeInsets.all(25),
+                      margin: const EdgeInsets.all(25),
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(imageList[index]))),
                     ),
-                    feedback: Container(
+                    child: Container(
                       height: 100,
                       width: 100,
-                      margin: EdgeInsets.all(25),
+                      margin: const EdgeInsets.all(25),
                       decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage(imageList[index]))),
+                        image: DecorationImage(
+                          image: AssetImage(
+                            imageList[index],
+                          ),
+                        ),
+                      ),
                     ))),
           ),
-          Spacer(),
+          const Spacer(),
           Column(
             children: List.generate(
                 5,
-                    (index) => DragTarget(
-                  onAcceptWithDetails: (details) {
-                    if(imageList == imageList1){
-                      // return
-                    }
-                  },
-                  builder: (context, candidateData, rejectedData) {
-                    return Container(
-                      height: 100,
-                      width: 100,
-                      margin: EdgeInsets.all(25),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(imageList1[index]))),
-                    );
-                  },
-                )),
+                (index) => DragTarget(
+                      onAcceptWithDetails: (details) {
+                        if (imageList == imageList1) {
+                          // return
+                        }
+                      },
+                      builder: (context, candidateData, rejectedData) {
+                        return Container(
+                          height: 100,
+                          width: 100,
+                          margin: const EdgeInsets.all(25),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(imageList1[index]))),
+                        );
+                      },
+                    )),
           )
         ],
       ),
