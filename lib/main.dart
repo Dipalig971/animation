@@ -1,3 +1,4 @@
+import 'package:animation/screen/animator_widget/home_Screen/home_screen.dart';
 import 'package:animation/screen/drag_drop_functionality/view/home_screen/home_Screen.dart';
 import 'package:animation/screen/hero_widget/view/details.dart';
 import 'package:animation/screen/hero_widget/view/hero_screen.dart';
@@ -12,12 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/':(context) => HomePage(),
-        '/details':(context) => DetailsScreen(),
-      },
+      home: AnimatorWidgetsScreen(),
+      // routes: {
+      //   '/':(context) => HomePage(),
+      //   '/details':(context) => DetailsScreen(),
+      // },
     );
   }
 }
